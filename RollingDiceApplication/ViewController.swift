@@ -34,14 +34,16 @@ class ViewController: UIViewController {
         setBackground()
     }
     
-    //Set up background image
+   /*
+    Set upbackground wallpaper
+    */
     func setBackground(){
-        if let background = UIImage(named: "wallpaper"){
-            self.view.backgroundColor = UIColor(patternImage: background)
+        if let background = UIImage(named: "wallpaper"){                         //we have checked UI image exist situation.
+            self.view.backgroundColor = UIColor(patternImage: background)        // set up backgroudn with UIColor but it should include patternImage parameter.
         }
     }
     
-    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {  //that function detect device vibration situation. motion Ended will run when the device vibration is finished.
         if currentSet <=  numberOfSet {
             diceShake()
         }else{
@@ -71,8 +73,8 @@ class ViewController: UIViewController {
             secondDice.image = UIImage(named: String(secondRandomNumber))
             playerTwoImage.image = UIImage(named: "wait")
             infoLabel.text = "Winner is..."
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2){
-                if self.playerDiceScores.playerOne > self.playerDiceScores.playerTwo{
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2){                  // that structure is similar to Future.delayed(). in here,we have selected the main thread.
+                if self.playerDiceScores.playerOne > self.playerDiceScores.playerTwo{       // NOTE: if you wants to use out of the Dispatch, you should use the "self" tag to reach the your goal.
                     //Player One WIN
                     self.infoLabel.text = "Winner is PLAYER ONE"
                     self.playerScores.playerOne+=1
